@@ -1,161 +1,138 @@
-document.body.classList.add('page-enter');
+document.body.classList.add('enter');
 
-const menuToggle = document.querySelector('.menu-toggle');
-const navMenu = document.querySelector('.nav-menu');
+const menuBtn = document.querySelector('.menu-btn');
+const menu = document.querySelector('.menu');
 const navLinks = document.querySelectorAll('.nav-link');
 
-menuToggle?.addEventListener('click', () => {
-  navMenu.classList.toggle('open');
-  const isOpen = navMenu.classList.contains('open');
-  menuToggle.setAttribute('aria-expanded', String(isOpen));
+menuBtn?.addEventListener('click', () => {
+  menu.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', String(menu.classList.contains('open')));
 });
 
 navLinks.forEach((link) => {
-  link.addEventListener('click', () => {
-    navMenu.classList.remove('open');
-  });
+  link.addEventListener('click', () => menu.classList.remove('open'));
 });
 
 const sections = document.querySelectorAll('main section[id]');
 window.addEventListener('scroll', () => {
-  const scrollPos = window.scrollY + 130;
+  const pos = scrollY + 140;
   sections.forEach((section) => {
-    const top = section.offsetTop;
-    const height = section.offsetHeight;
-    const id = section.getAttribute('id');
+    const id = section.id;
     const nav = document.querySelector(`.nav-link[href="#${id}"]`);
     if (!nav) return;
-    if (scrollPos >= top && scrollPos < top + height) {
-      navLinks.forEach((l) => l.classList.remove('active'));
+    if (pos >= section.offsetTop && pos < section.offsetTop + section.offsetHeight) {
+      navLinks.forEach((n) => n.classList.remove('active'));
       nav.classList.add('active');
     }
   });
 });
 
-const revealEls = document.querySelectorAll('.reveal');
-const revealObserver = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       entry.target.classList.add('show');
-      revealObserver.unobserve(entry.target);
+      observer.unobserve(entry.target);
     }
   });
 }, { threshold: 0.15 });
-revealEls.forEach((el) => revealObserver.observe(el));
+document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-const counters = document.querySelectorAll('.counter');
-const animateCounter = (counter) => {
-  const target = Number(counter.dataset.target);
-  let current = 0;
-  const increment = Math.max(1, Math.floor(target / 90));
-  const timer = setInterval(() => {
-    current += increment;
-    if (current >= target) {
-      counter.textContent = target.toLocaleString();
-      clearInterval(timer);
+const animateCounter = (el) => {
+  const target = Number(el.dataset.target);
+  let value = 0;
+  const step = Math.max(1, Math.floor(target / 90));
+  const t = setInterval(() => {
+    value += step;
+    if (value >= target) {
+      el.textContent = target.toLocaleString();
+      clearInterval(t);
     } else {
-      counter.textContent = current.toLocaleString();
+      el.textContent = value.toLocaleString();
     }
   }, 18);
 };
-const counterObserver = new IntersectionObserver((entries) => {
+
+const cObs = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       animateCounter(entry.target);
-      counterObserver.unobserve(entry.target);
+      cObs.unobserve(entry.target);
     }
   });
 }, { threshold: 0.5 });
-counters.forEach((counter) => counterObserver.observe(counter));
+document.querySelectorAll('.counter').forEach((c) => cObs.observe(c));
 
-const quizData = [
-  {
-    q: 'What is the value of x in 2x + 6 = 18?',
-    options: ['4', '6', '8', '12'],
-    answer: 1,
-  },
-  {
-    q: 'Choose the correct synonym for "rapid".',
-    options: ['Slow', 'Quick', 'Weak', 'Tiny'],
-    answer: 1,
-  },
-  {
-    q: 'Which organelle controls cell activities?',
-    options: ['Nucleus', 'Ribosome', 'Cytoplasm', 'Membrane'],
-    answer: 0,
-  },
+const data = [
+  { q: 'If 3x + 9 = 24, what is x?', o: ['2', '3', '5', '6'], a: 2 },
+  { q: 'Choose the antonym of "scarce".', o: ['Rare', 'Few', 'Abundant', 'Brief'], a: 2 },
+  { q: 'The powerhouse of the cell is?', o: ['Nucleus', 'Mitochondrion', 'Cell wall', 'Vacuole'], a: 1 }
 ];
 
-let currentQuestion = 0;
+let i = 0;
 let score = 0;
-let answered = false;
+let locked = false;
 
-const questionEl = document.getElementById('question');
-const optionsEl = document.getElementById('options');
-const scoreEl = document.getElementById('score');
-const nextBtn = document.getElementById('next-btn');
+const qEl = document.getElementById('question');
+const aEl = document.getElementById('answers');
+const sEl = document.getElementById('score');
+const nextBtn = document.getElementById('next');
 
-function loadQuestion() {
-  answered = false;
-  const current = quizData[currentQuestion];
-  questionEl.textContent = current.q;
-  optionsEl.innerHTML = '';
-  current.options.forEach((option, index) => {
-    const btn = document.createElement('button');
-    btn.className = 'option';
-    btn.textContent = option;
-    btn.addEventListener('click', () => checkAnswer(index, btn));
-    optionsEl.appendChild(btn);
+function renderQ() {
+  locked = false;
+  const item = data[i];
+  qEl.textContent = item.q;
+  aEl.innerHTML = '';
+  item.o.forEach((text, idx) => {
+    const b = document.createElement('button');
+    b.className = 'ans';
+    b.textContent = text;
+    b.addEventListener('click', () => pick(idx, b));
+    aEl.appendChild(b);
   });
 }
 
-function checkAnswer(selected, button) {
-  if (answered) return;
-  answered = true;
-  const correct = quizData[currentQuestion].answer;
-  const buttons = optionsEl.querySelectorAll('.option');
-  buttons.forEach((btn, index) => {
-    if (index === correct) btn.classList.add('correct');
+function pick(selected, btn) {
+  if (locked) return;
+  locked = true;
+  const correct = data[i].a;
+  aEl.querySelectorAll('.ans').forEach((b, idx) => {
+    if (idx === correct) b.classList.add('ok');
   });
   if (selected === correct) {
     score += 1;
-    button.classList.add('correct');
+    btn.classList.add('ok');
   } else {
-    button.classList.add('wrong');
+    btn.classList.add('no');
   }
-  scoreEl.textContent = `Score: ${score}`;
+  sEl.textContent = `Score: ${score}`;
 }
 
 nextBtn?.addEventListener('click', () => {
-  currentQuestion += 1;
-  if (currentQuestion >= quizData.length) {
-    questionEl.textContent = `Quiz complete! Final Score: ${score}/${quizData.length}`;
-    optionsEl.innerHTML = '';
+  i += 1;
+  if (i >= data.length) {
+    qEl.textContent = `Quiz complete! Final score: ${score}/${data.length}`;
+    aEl.innerHTML = '';
     nextBtn.disabled = true;
     return;
   }
-  loadQuestion();
+  renderQ();
+});
+renderQ();
+
+document.querySelectorAll('.q').forEach((q) => {
+  q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
 });
 
-loadQuestion();
-
-document.querySelectorAll('.faq-question').forEach((faqBtn) => {
-  faqBtn.addEventListener('click', () => {
-    const item = faqBtn.parentElement;
-    item.classList.toggle('open');
-  });
-});
-
-document.querySelectorAll('.ripple').forEach((btn) => {
-  btn.addEventListener('click', (e) => {
-    const circle = document.createElement('span');
-    const rect = btn.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    circle.style.width = circle.style.height = `${size}px`;
-    circle.style.left = `${e.clientX - rect.left - size / 2}px`;
-    circle.style.top = `${e.clientY - rect.top - size / 2}px`;
-    circle.classList.add('ripple-effect');
-    btn.appendChild(circle);
-    setTimeout(() => circle.remove(), 600);
+document.querySelectorAll('.ripple').forEach((el) => {
+  el.addEventListener('click', (e) => {
+    const r = el.getBoundingClientRect();
+    const d = Math.max(r.width, r.height);
+    const c = document.createElement('span');
+    c.className = 'ripple-effect';
+    c.style.width = c.style.height = `${d}px`;
+    c.style.left = `${e.clientX - r.left - d / 2}px`;
+    c.style.top = `${e.clientY - r.top - d / 2}px`;
+    el.appendChild(c);
+    setTimeout(() => c.remove(), 600);
   });
 });
