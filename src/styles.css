@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+.sec { @apply py-20; }
+.glass { @apply rounded-2xl border border-white/15 bg-white/5 backdrop-blur-xl shadow-glow; }
+.btn { @apply rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-5 py-3 font-semibold text-white transition hover:scale-[1.02]; }
+.btn2 { @apply rounded-xl border border-white/25 bg-white/5 px-5 py-3 font-semibold text-white transition hover:bg-white/10; }
+.input { @apply rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white placeholder:text-slate-400 outline-none focus:border-violet-400; }
+.chip { @apply rounded-full border border-white/20 px-4 py-2 text-sm text-white/90 hover:bg-white/10; }
