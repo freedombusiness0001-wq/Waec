@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WAEC Prep - Smart Exam Preparation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+
+    <header class="header" id="home">
+      <nav class="navbar container" aria-label="Main Navigation">
+        <a href="#home" class="logo">WAEC<span>Prep</span></a>
+
+        <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+          <span></span><span></span><span></span>
+        </button>
+
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#subjects" class="nav-link">Subjects</a></li>
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#quiz" class="nav-link">Quiz</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+          <li><a href="#" class="btn btn-sm ripple">Get Started</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero section">
+        <div class="container hero-grid reveal">
+          <div class="hero-content">
+            <p class="badge">#1 WAEC Revision Platform</p>
+            <h1>Master WAEC with <span>Smart Practice</span> and Real Exam Insights</h1>
+            <p class="hero-text">
+              Boost your confidence with AI-powered quizzes, progress analytics, and subject-focused prep paths built for Nigerian students.
+            </p>
+            <div class="hero-actions">
+              <a href="#quiz" class="btn btn-primary ripple">Start Free Quiz</a>
+              <a href="#dashboard" class="btn btn-ghost ripple">View Dashboard</a>
+            </div>
+            <div class="stats">
+              <article class="glass stat-card">
+                <h3 class="counter" data-target="120">0</h3>
+                <p>Practice Sets</p>
+              </article>
+              <article class="glass stat-card">
+                <h3 class="counter" data-target="98">0</h3>
+                <p>Success Rate %</p>
+              </article>
+              <article class="glass stat-card">
+                <h3 class="counter" data-target="45000">0</h3>
+                <p>Students</p>
+              </article>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="glass mockup floating">
+              <h3>Today's Target</h3>
+              <div class="progress-wrap">
+                <div class="progress"><span style="width: 76%"></span></div>
+                <small>76% Completed</small>
+              </div>
+              <div class="mockup-row">
+                <span>Mathematics</span>
+                <strong>92%</strong>
+              </div>
+              <div class="mockup-row">
+                <span>English</span>
+                <strong>88%</strong>
+              </div>
+              <div class="mockup-row">
+                <span>Biology</span>
+                <strong>79%</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="subjects" class="section">
+        <div class="container reveal">
+          <h2 class="section-title">Top WAEC Subjects</h2>
+          <div class="card-grid subjects-grid">
+            <article class="glass subject-card"><h3>Mathematics</h3><p>Algebra, geometry, and exam-style calculations.</p></article>
+            <article class="glass subject-card"><h3>English</h3><p>Comprehension, grammar mastery, and essays.</p></article>
+            <article class="glass subject-card"><h3>Biology</h3><p>Cell systems, genetics, ecology, and diagrams.</p></article>
+            <article class="glass subject-card"><h3>Chemistry</h3><p>Organic, inorganic, and practical question drills.</p></article>
+            <article class="glass subject-card"><h3>Physics</h3><p>Laws, formulas, and objective rapid practice.</p></article>
+            <article class="glass subject-card"><h3>Economics</h3><p>Theory, market systems, and data interpretation.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="section">
+        <div class="container reveal">
+          <h2 class="section-title">Why Students Choose WAECPrep</h2>
+          <div class="card-grid features-grid">
+            <article class="glass feature-card"><h3>Adaptive Practice</h3><p>Questions adjust to your skill level in real time.</p></article>
+            <article class="glass feature-card"><h3>Performance Analytics</h3><p>Track strengths and weak topics with smart charts.</p></article>
+            <article class="glass feature-card"><h3>Timed Mock Exams</h3><p>Simulate exam pressure with realistic timers.</p></article>
+            <article class="glass feature-card"><h3>Revision Streaks</h3><p>Daily goals and reminders that keep you consistent.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="dashboard" class="section">
+        <div class="container reveal">
+          <h2 class="section-title">Professional Student Dashboard</h2>
+          <div class="glass dashboard">
+            <aside>
+              <h3>Subjects</h3>
+              <ul>
+                <li class="active">Mathematics</li><li>English</li><li>Biology</li><li>Physics</li>
+              </ul>
+            </aside>
+            <div class="dashboard-content">
+              <div class="dashboard-top">
+                <article class="glass mini"><p>Weekly Score</p><h4>87%</h4></article>
+                <article class="glass mini"><p>Questions Solved</p><h4>1,240</h4></article>
+                <article class="glass mini"><p>Rank</p><h4>Top 5%</h4></article>
+              </div>
+              <div class="chart"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="quiz" class="section">
+        <div class="container reveal">
+          <h2 class="section-title">Quick Interactive Quiz</h2>
+          <div class="glass quiz-card">
+            <p id="question">Question appears here</p>
+            <div id="options" class="options"></div>
+            <div class="quiz-controls">
+              <button id="next-btn" class="btn btn-primary ripple">Next Question</button>
+              <p id="score">Score: 0</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container reveal">
+          <h2 class="section-title">What Students Are Saying</h2>
+          <div class="card-grid testimonials-grid">
+            <article class="glass testimonial"><p>“WAECPrep helped me jump from C to A1 in mathematics.”</p><h4>— Adaeze K.</h4></article>
+            <article class="glass testimonial"><p>“The mock exams felt exactly like the real paper. Highly recommended.”</p><h4>— Ibrahim S.</h4></article>
+            <article class="glass testimonial"><p>“Dashboard insights showed my weak topics quickly.”</p><h4>— Chinedu O.</h4></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="section">
+        <div class="container reveal">
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <div class="faq-list">
+            <article class="glass faq-item">
+              <button class="faq-question">Is WAECPrep free to start?</button>
+              <div class="faq-answer"><p>Yes, you can start with free quizzes and upgrade for advanced analytics.</p></div>
+            </article>
+            <article class="glass faq-item">
+              <button class="faq-question">Can I use it on mobile?</button>
+              <div class="faq-answer"><p>Absolutely. The platform is fully responsive across all devices.</p></div>
+            </article>
+            <article class="glass faq-item">
+              <button class="faq-question">Are questions updated regularly?</button>
+              <div class="faq-answer"><p>Yes, our content team updates question banks and trends frequently.</p></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <a href="#home" class="logo">WAEC<span>Prep</span></a>
+        <p>© 2026 WAECPrep. Built for smarter exam success.</p>
+        <div class="footer-links">
+          <a href="#">Privacy</a><a href="#">Terms</a><a href="#faq">Support</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
